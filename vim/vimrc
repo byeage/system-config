@@ -1,0 +1,95 @@
+" ================================
+" plug.vim
+" ================================
+"  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" ================================
+
+
+
+" ================================
+" 基础
+" ================================
+set nocompatible
+syntax on
+filetype plugin indent on
+
+set number
+set cursorline
+set encoding=utf-8
+set backspace=indent,eol,start
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set clipboard=unnamedplus
+set mouse=a
+
+set hlsearch
+set incsearch
+set noerrorbells
+set novisualbell
+
+
+" Backup 文件
+set backup
+set backupdir^=~/.vim/backup//
+
+" Undo 文件（持久化撤销）
+set undofile
+set undodir^=~/.vim/undo//
+
+
+
+" Use a steady vertical bar for Insert mode (escape sequence \e[6 q)
+let &t_SI = "\<Esc>[6 q"
+
+" Use a steady block for Normal mode (escape sequence \e[2 q)
+let &t_EI = "\<Esc>[2 q"
+
+
+" ================================
+" 插件管理：vim-plug
+" ================================
+call plug#begin('~/.vim/plugged')
+
+" 配色主题
+Plug 'morhetz/gruvbox'
+
+" 文件树
+Plug 'preservim/nerdtree'
+
+" 状态栏更好看
+Plug 'itchyny/lightline.vim'
+
+" 注释工具（gcc 注释行）
+Plug 'tpope/vim-commentary'
+
+" FZF 搜索增强（需要系统安装 fzf）
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+
+call plug#end()
+
+" ================================
+" 主题
+" ================================
+set background=dark
+colorscheme gruvbox
+
+" ================================
+" NERDTree 快捷键
+" ================================
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" ================================
+" FZF 快捷键
+" ================================
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :Rg<CR>
+
+" ================================
+" 体验优化
+" ================================
+let g:lightline = { 'colorscheme': 'gruvbox' }
+
