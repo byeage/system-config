@@ -22,29 +22,41 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set clipboard=unnamedplus
-set mouse=a
 
 set hlsearch
 set incsearch
 set noerrorbells
 set novisualbell
-
-
-" Backup 文件
-set backup
-set backupdir^=~/.vim/backup//
+" 不备份文件
+set nobackup
 
 " Undo 文件（持久化撤销）
 set undofile
-set undodir^=~/.vim/undo//
+set undodir^=~/.vim/undo/
+" 自动创建目录
+if !isdirectory(&undodir)
+  call mkdir(&undodir, 'p', 0700)
+endif
 
 
+if has('mouse')
+  if has('gui_running') || (&term =~'xterm' && !has('mac'))
+    " 启用完全的鼠标支持
+    " 此时鼠标拖拽就会在 Vim 里使用可视模式选择内容（只能在 Vim 里使用）。
+    " 而当用户按下 Shift 键时，窗口系统接管鼠标事件，用户可以使用鼠标复制 Vim 窗口里的内容供其他应用程序使用
+    set mouse=a
+  else
+    set mouse=nvi    
+  endif
+endif
 
-" Use a steady vertical bar for Insert mode (escape sequence \e[6 q)
+
+" 设置插入模式光标
 let &t_SI = "\<Esc>[6 q"
-
-" Use a steady block for Normal mode (escape sequence \e[2 q)
+" 设置普通模式光标
 let &t_EI = "\<Esc>[2 q"
+
+
 
 
 " ================================
