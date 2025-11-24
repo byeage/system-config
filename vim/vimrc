@@ -1,3 +1,4 @@
+" vim doc https://yianwillis.github.io/vimcdoc
 " ================================
 " plug.vim
 " ================================
@@ -18,18 +19,27 @@ set number
 set cursorline
 set encoding=utf-8
 set backspace=indent,eol,start
+" 制表符宽度
 set tabstop=2
+" 回车自动缩进
 set shiftwidth=2
+" <Tab> <BS> 应用tabstop，expandtab 缩进
+set softtabstop=2
+" 那输入中的 tab 会被转变成空格；如果关闭的话，则 tab 字符会被保留
 set expandtab
-set clipboard=unnamedplus
+" 记住上一行的缩进位置
+set autoindent
 
+set clipboard=unnamedplus
 set hlsearch
 set incsearch
+
+" 取消错误提示
 set noerrorbells
 set novisualbell
+
 " 不备份文件
 set nobackup
-
 " Undo 文件（持久化撤销）
 set undofile
 set undodir^=~/.vim/undo/
@@ -38,7 +48,7 @@ if !isdirectory(&undodir)
   call mkdir(&undodir, 'p', 0700)
 endif
 
-
+" 鼠标
 if has('mouse')
   if has('gui_running') || (&term =~'xterm' && !has('mac'))
     " 启用完全的鼠标支持
@@ -81,6 +91,40 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
 
+" CTags 代码结构图
+Plug 'majutsushi/tagbar'
+
+" 异步执行
+Plug 'skywind3000/asyncrun.vim'
+
+
+" 文本对象增强
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
+
+" 撤销树
+Plug 'mbbill/undotree'
+
+" 缓冲区更名移动
+Plug  'tpope/vim-eunuch'
+
+
+" YCM
+Plug 'ycm-core/YouCompleteMe'
+
+" Autopairs
+Plug 'jiangmiao/auto-pairs'
+
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" UI
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 
 " ================================
@@ -89,16 +133,51 @@ call plug#end()
 set background=dark
 colorscheme gruvbox
 
+
+" 设置空格为 leader
+let mapleader = " "
+let maplocalleader = " "
+
 " ================================
 " NERDTree 快捷键
 " ================================
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 " ================================
 " FZF 快捷键
 " ================================
 nnoremap <leader>f :Files<CR>
-nnoremap <leader>g :Rg<CR>
+nnoremap <leader>/ :Rg<CR>
+
+
+
+
+" ================================
+" CTags 代码结构图
+" ================================
+nnoremap <F9>      :TagbarToggle<CR>
+
+
+" YCM
+nnoremap <Leader>fi :YcmCompleter FixIt<CR>
+nnoremap <Leader>gt :YcmCompleter GoTo<CR>
+nnoremap <Leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>gh :YcmCompleter GoToDeclaration<CR>
+nnoremap <Leader>gr :YcmCompleter GoToReferences<CR>
+
+let g:ycm_auto_hover = ''
+let g:ycm_complete_in_comments = 1
+let g:ycm_filetype_whitelist = {
+      \ 'c': 1,
+      \ 'cpp': 1,
+      \ 'python': 1,
+      \ 'vim': 1,
+      \ 'sh': 1,
+      \ 'zsh': 1,
+      \ }
+let g:ycm_goto_buffer_command = 'split-or-existing-window'
+let g:ycm_key_invoke_completion = '<C-Z>'
+
 
 " ================================
 " 体验优化
