@@ -115,7 +115,7 @@ Plug 'ycm-core/YouCompleteMe'
 
 " Autopairs
 Plug 'jiangmiao/auto-pairs'
-
+Plug 'justinmk/vim-sneak'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -150,6 +150,13 @@ nnoremap <leader>f :Files<CR>
 nnoremap <leader>/ :Rg<CR>
 
 
+
+" ================================
+" Sneak
+" ================================
+let g:sneak#label = 1
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
 
 
 " ================================
