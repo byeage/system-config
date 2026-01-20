@@ -1,6 +1,7 @@
 local o = vim.opt
 local g = vim.g
 
+vim.api.nvim_set_option("clipboard","unnamed")
 
 -- General Settings
 o.termguicolors = true -- 启用24位真彩色
